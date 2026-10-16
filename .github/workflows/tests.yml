@@ -49,8 +49,9 @@ jobs:
 
       - name: Install dependencies
         env:
-          # Every Laravel 11 release has an unpatched security advisory, so Composer 2.9+ refuses to install it.
-          COMPOSER_NO_SECURITY_BLOCKING: ${{ matrix.laravel == '11.*' && '1' || '0' }}
+          # Composer 2.9+ refuses releases with security advisories: all of Laravel 11 and the oldest 12.x/13.x.
+          # Allow them where the job is meant to test them, so prefer-lowest really installs the declared minimums.
+          COMPOSER_NO_SECURITY_BLOCKING: ${{ (matrix.laravel == '11.*' || matrix.stability == 'prefer-lowest') && '1' || '0' }}
         run: |
           composer require "illuminate/auth:${{ matrix.laravel }}" "illuminate/container:${{ matrix.laravel }}" "illuminate/contracts:${{ matrix.laravel }}" --no-interaction --no-update
           composer require --dev "orchestra/testbench:${{ matrix.testbench }}" --no-interaction --no-update
