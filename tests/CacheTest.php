@@ -123,4 +123,30 @@ class CacheTest extends TestCase
         $this->assertTrue($this->testUser->hasPermissionTo('edit-articles'));
         $this->assertCount(11, DB::getQueryLog());
     }
+
+    #[Test]
+    public function it_can_read_the_permissions_from_a_cache_that_does_not_unserialize_objects()
+    {
+        // New Laravel 12.x/13.x applications ship with this setting, which only matters for serializing stores
+        $this->app['config']->set('cache.serializable_classes', false);
+        $this->app['config']->set('cache.default', 'file');
+        $this->app['cache']->forgetDriver('file');
+        $this->app->forgetInstance('cache.store');
+
+        $registrar = app(PermissionRegistrar::class);
+        $registrar->forgetCachedPermissions();
+        $registrar->getPermissions();
+
+        $permissions = $registrar->getPermissions();
+
+        $this->assertContainsOnlyInstancesOf(Permission::class, $permissions);
+        $this->assertEqualsCanonicalizing(
+            ['edit-articles', 'edit-news', 'edit-categories', 'admin-permission'],
+            $permissions->pluck('name')->all()
+        );
+
+        $this->testUser->givePermissionTo('edit-articles');
+
+        $this->assertTrue($this->testUser->fresh()->hasPermissionTo('edit-articles'));
+    }
 }
