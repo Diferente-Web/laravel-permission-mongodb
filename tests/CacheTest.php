@@ -120,8 +120,9 @@ class CacheTest extends TestCase
         $this->assertTrue($this->testUser->hasPermissionTo('edit-news'));
         $this->assertCount(10, DB::getQueryLog());
 
+        // The permission comes from the cache, but as a new model whose roles relation is loaded again
         $this->assertTrue($this->testUser->hasPermissionTo('edit-articles'));
-        $this->assertCount(11, DB::getQueryLog());
+        $this->assertCount(12, DB::getQueryLog());
     }
 
     #[Test]
