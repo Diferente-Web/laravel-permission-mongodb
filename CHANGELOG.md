@@ -17,6 +17,7 @@ First release published as `diferente-web/laravel-permission-mongodb`, a maintai
 
 ### Fixed
 - Cached permissions can be read back when `cache.serializable_classes` forbids objects, the default in new Laravel 12.x and 13.x applications
+- Nullable parameters are declared explicitly, so PHP 8.4 no longer reports deprecations
 
 
 ## 5.0.0-alpha - 2022-07-01
