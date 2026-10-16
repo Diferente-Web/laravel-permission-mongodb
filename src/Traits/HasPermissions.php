@@ -233,7 +233,7 @@ trait HasPermissions
      * @return bool
      * @throws ReflectionException
      */
-    public function hasPermissionTo($permission, string $guardName = null): bool
+    public function hasPermissionTo($permission, ?string $guardName = null): bool
     {
         if (is_string($permission)) {
             $permission = $this->getPermissionClass()->findByName(

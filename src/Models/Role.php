@@ -79,7 +79,7 @@ class Role extends Model implements RoleInterface
      * @throws RoleAlreadyExists
      * @throws ReflectionException
      */
-    public static function findOrCreate(string $name, string $guardName = null): Role
+    public static function findOrCreate(string $name, ?string $guardName = null): Role
     {
         $guardName = $guardName ?? (new Guard())->getDefaultName(static::class);
 
@@ -105,7 +105,7 @@ class Role extends Model implements RoleInterface
      * @throws RoleDoesNotExist
      * @throws ReflectionException
      */
-    public static function findByName(string $name, string $guardName = null): RoleInterface
+    public static function findByName(string $name, ?string $guardName = null): RoleInterface
     {
         $guardName = $guardName ?? (new Guard())->getDefaultName(static::class);
 

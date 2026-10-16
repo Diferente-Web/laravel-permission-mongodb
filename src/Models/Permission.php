@@ -81,7 +81,7 @@ class Permission extends Model implements PermissionInterface
      * @return PermissionInterface
      * @throws ReflectionException
      */
-    public static function findOrCreate(string $name, string $guardName = null): PermissionInterface
+    public static function findOrCreate(string $name, ?string $guardName = null): PermissionInterface
     {
         $guardName = $guardName ?? (new Guard())->getDefaultName(static::class);
 
@@ -143,7 +143,7 @@ class Permission extends Model implements PermissionInterface
      * @return PermissionInterface
      * @throws ReflectionException
      */
-    public static function findByName(string $name, string $guardName = null): PermissionInterface
+    public static function findByName(string $name, ?string $guardName = null): PermissionInterface
     {
         $guardName = $guardName ?? (new Guard())->getDefaultName(static::class);
 
