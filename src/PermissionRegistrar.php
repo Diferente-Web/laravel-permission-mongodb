@@ -20,7 +20,12 @@ class PermissionRegistrar
 
     protected Repository $cache;
 
-    protected string $cacheKey = 'maklad.permission.cache';
+    protected string $cacheKey = 'maklad.permission.cache.v2';
+
+    /**
+     * Key used by older releases, which cached the models themselves in a format this release can't read back
+     */
+    protected string $legacyCacheKey = 'maklad.permission.cache';
 
     protected string $permissionClass;
 
@@ -61,6 +66,7 @@ class PermissionRegistrar
     public function forgetCachedPermissions(): void
     {
         $this->cache->forget($this->cacheKey);
+        $this->cache->forget($this->legacyCacheKey);
     }
 
     /**
@@ -78,13 +84,6 @@ class PermissionRegistrar
                 return Document::fromPHP($permission->getAttributes())->toCanonicalExtendedJSON();
             })->all();
         });
-
-        // Older releases cached the models themselves, which may come back as incomplete objects
-        if (! is_array($documents)) {
-            $this->forgetCachedPermissions();
-
-            return $this->getPermissions();
-        }
 
         return $this->getPermissionClass()->hydrate(array_map(function (string $document) {
             return Document::fromJSON($document)->toPHP(['root' => 'array', 'document' => 'array', 'array' => 'array']);

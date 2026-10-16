@@ -149,5 +149,19 @@ class CacheTest extends TestCase
         $this->testUser->givePermissionTo('edit-articles');
 
         $this->assertTrue($this->testUser->fresh()->hasPermissionTo('edit-articles'));
+
+        $registrar->forgetCachedPermissions();
+    }
+
+    #[Test]
+    public function it_ignores_and_forgets_the_permissions_cached_by_older_releases()
+    {
+        $this->app['cache']->put('maklad.permission.cache', collect([new Permission(['name' => 'stale-permission'])]));
+
+        $this->assertNotContains('stale-permission', $this->registrar->getPermissions()->pluck('name'));
+
+        $this->registrar->forgetCachedPermissions();
+
+        $this->assertFalse($this->app['cache']->has('maklad.permission.cache'));
     }
 }
