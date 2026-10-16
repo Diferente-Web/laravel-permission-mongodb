@@ -2,10 +2,13 @@
 
 All Notable changes to `laravel-permission-mongodb` will be documented in this file.
 
-## Unreleased
+## 7.0.0 - 2026-10-16
+
+First release published as `diferente-web/laravel-permission-mongodb`, a maintained fork of `mostafamaklad/laravel-permission-mongodb`. The `Maklad\Permission` namespace is unchanged.
 
 ### Added
 - Support of Laravel 12.x and 13.x
+- GitHub Actions matrix for PHP 8.2-8.4 and Laravel 11-13
 
 ### Changed
 - Require `mongodb/laravel-mongodb` ^5.7, the first release that supports Laravel 11, 12 and 13

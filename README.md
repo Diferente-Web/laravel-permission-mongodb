@@ -1,16 +1,13 @@
 [![ReadMeSupportPalestine](https://raw.githubusercontent.com/Safouene1/support-palestine-banner/master/banner-support.svg)](https://sahem.ksrelief.org/Pages/ProgramDetails/1ca8852b-9e6d-ee11-b83f-005056ac5498)
 # laravel-permission-mongodb
 
-[![Latest Version on Packagist][ico-version]][link-releases]
+[![Latest Version on Packagist][ico-version]][link-packagist]
 [![Software License][ico-license]](LICENSE.md)
-[![Build Status][ico-travis]][link-travis]
-[![Scrutinizer][ico-scrutinizer]][link-scrutinizer]
-[![Maintainability][ico-codeclimate-maintainability]][link-codeclimate-maintainability]
-[![Codacy Badge][ico-codacy]][link-codacy]
-[![StyleCI][ico-styleci]][link-styleci]
-[![Coverage Status][ico-coveralls]][link-coveralls]
+[![Tests][ico-tests]][link-tests]
 [![Total Downloads][ico-downloads]][link-packagist]
 [![StandWithPalestine](https://raw.githubusercontent.com/Safouene1/support-palestine-banner/master/StandWithPalestine.svg)](https://sahem.ksrelief.org/Pages/ProgramDetails/1ca8852b-9e6d-ee11-b83f-005056ac5498)
+
+> This is a maintained fork of [mostafamaklad/laravel-permission-mongodb](https://github.com/mostafamaklad/laravel-permission-mongodb) by [Diferente Web](https://github.com/Diferente-Web), published as `diferente-web/laravel-permission-mongodb`. The PHP namespace is still `Maklad\Permission`, so code written for the original package keeps working.
 
 This package allows you to manage user permissions and roles in a database.
 It is inspired from [laravel-permission][link-laravel-permission]. Same code same every thing but it is compatible with [laravel-mongodb][link-laravel-mongodb]
@@ -68,37 +65,30 @@ $user->can('edit articles');
 
 ### Laravel Compatibility
 
- Laravel  | Package
+ Laravel      | `diferente-web/laravel-permission-mongodb`
+:-------------|:----------
+ 11.x - 13.x  | 7.x
+ 10.x - 12.x  | 6.0.2 (`legacy-6.x` branch)
+
+For older Laravel versions use the original package:
+
+ Laravel  | `mostafamaklad/laravel-permission-mongodb`
 :---------|:----------
  5.x      | 1.x or 2.x or 3.x
  6.x      | 2.x or 3.x
  7.x      | 3.x
  8.x      | 3.1.x
  9.x      | 4.x
- 10.x     | 6.x
- 11.x - 13.x | master (unreleased)
 
 ### Laravel
 
 You can install the package via composer:
 
-For laravel 11.x to 13.x, until a new version is tagged, use
-
 ``` bash
-composer require mostafamaklad/laravel-permission-mongodb:dev-master
+composer require diferente-web/laravel-permission-mongodb
 ```
 
-For laravel 9.x use
-
-``` bash
-composer require mostafamaklad/laravel-permission-mongodb
-```
-
-For laravel 8.x and older use
-
-``` bash
-composer require mostafamaklad/laravel-permission-mongodb:"^3.1"
-```
+If you are moving from `mostafamaklad/laravel-permission-mongodb`, remove it first: both packages ship the same `Maklad\Permission` classes and can't be installed together. Your code, configuration and data don't need changes, but the permission cache now lives under `maklad.permission.cache.v2` (see the [CHANGELOG](CHANGELOG.md)).
 
 You can publish [the migration](database/migrations/create_permission_collections.php.stub) with:
 
@@ -197,14 +187,14 @@ return [
 You can install the package via Composer:
 
 ``` bash
-composer require mostafamaklad/laravel-permission-mongodb
+composer require diferente-web/laravel-permission-mongodb
 ```
 
 Copy the required files:
 
 ```bash
-cp vendor/mostafamaklad/laravel-permission-mongodb/config/permission.php config/permission.php
-cp vendor/mostafamaklad/laravel-permission-mongodb/database/migrations/create_permission_collections.php.stub database/migrations/2018_01_01_000000_create_permission_collections.php
+cp vendor/diferente-web/laravel-permission-mongodb/config/permission.php config/permission.php
+cp vendor/diferente-web/laravel-permission-mongodb/database/migrations/create_permission_collections.php.stub database/migrations/2018_01_01_000000_create_permission_collections.php
 ```
 
 You will also need to create another configuration file at `config/auth.php`. Get it on the Laravel repository or just run the following command:
@@ -788,10 +778,12 @@ If you discover any security-related issues, please email dev.mostafa.maklad@gma
 The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
 
 
-[link-packagist]: https://packagist.org/packages/mostafamaklad/laravel-permission-mongodb
-[ico-version]: https://img.shields.io/packagist/v/mostafamaklad/laravel-permission-mongodb.svg?style=flat-square
-[ico-license]: https://img.shields.io/packagist/l/mostafamaklad/laravel-permission-mongodb.svg?style=flat-square
-[ico-downloads]: https://img.shields.io/packagist/dt/mostafamaklad/laravel-permission-mongodb.svg?style=flat-square
+[link-packagist]: https://packagist.org/packages/diferente-web/laravel-permission-mongodb
+[ico-version]: https://img.shields.io/packagist/v/diferente-web/laravel-permission-mongodb.svg?style=flat-square
+[ico-license]: https://img.shields.io/packagist/l/diferente-web/laravel-permission-mongodb.svg?style=flat-square
+[ico-downloads]: https://img.shields.io/packagist/dt/diferente-web/laravel-permission-mongodb.svg?style=flat-square
+[link-tests]: https://github.com/Diferente-Web/laravel-permission-mongodb/actions/workflows/tests.yml
+[ico-tests]: https://img.shields.io/github/actions/workflow/status/Diferente-Web/laravel-permission-mongodb/tests.yml?branch=master&label=tests&style=flat-square
 
 [link-laravel-5.2]: https://laravel.com/docs/5.2
 [ico-laravel-5.2]: https://img.shields.io/badge/Laravel-5.2.x-brightgreen.svg?style=flat-square

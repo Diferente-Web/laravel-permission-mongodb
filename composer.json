@@ -1,6 +1,6 @@
 {
-    "name": "mostafamaklad/laravel-permission-mongodb",
-    "description": "Permission handling for Laravel 5.2 and up using mongodb",
+    "name": "diferente-web/laravel-permission-mongodb",
+    "description": "Permission handling for Laravel 11, 12 and 13 using MongoDB. Maintained fork of mostafamaklad/laravel-permission-mongodb",
     "keywords": [
         "laravel",
         "security",
@@ -12,7 +12,7 @@
         "mostafa",
         "spatie"
     ],
-    "homepage": "https://github.com/mostafamaklad/laravel-permission-mongodb",
+    "homepage": "https://github.com/Diferente-Web/laravel-permission-mongodb",
     "license": "MIT",
     "authors": [
         {
@@ -26,14 +26,25 @@
             "email": "freek@spatie.be",
             "homepage": "https://spatie.be",
             "role": "The original module"
+        },
+        {
+            "name": "Diferente Web",
+            "homepage": "https://github.com/Diferente-Web",
+            "role": "Maintainer of this fork"
         }
     ],
+    "support": {
+        "source": "https://github.com/Diferente-Web/laravel-permission-mongodb"
+    },
     "require": {
         "php": "^8.2",
         "illuminate/auth": "^11.0|^12.0|^13.0",
         "illuminate/container": "^11.0|^12.0|^13.0",
         "illuminate/contracts": "^11.0|^12.0|^13.0",
         "mongodb/laravel-mongodb": "^5.7"
+    },
+    "conflict": {
+        "mostafamaklad/laravel-permission-mongodb": "*"
     },
     "require-dev": {
         "monolog/monolog": "^3.2",
